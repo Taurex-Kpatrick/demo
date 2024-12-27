@@ -1,0 +1,32 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+
+namespace api
+{ 
+   
+    [ApiController]
+    public class HealthController : ControllerBase
+    {
+       private string ConnectionString="";
+   
+        public HealthController(IConfiguration configuration)
+        {
+            ConnectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+
+        [HttpGet]
+        [Route("/")]
+
+public ActionResult<string> GetHealth()
+{
+
+
+
+return Ok("API Running on ["+ConnectionString+"] " + DateTime.Now.ToString());
+}   
+}
+}
